@@ -1,0 +1,25 @@
+@startuml
+title Diagrama de Secuencia - Postulación Exitosa
+
+actor Aspirante
+boundary "Interfaz de Usuario" as UI
+control "Controlador de Postulaciones" as CP
+database "Base de Datos" as BD
+participant "Servicio de Correo Externo (API)" as Correo
+
+Aspirante -> UI : Selecciona una vacante
+UI -> CP : Solicita postulación\n(vacante, datos)
+
+CP -> BD : Verificar vacante y aspirante
+BD --> CP : Información válida
+
+CP -> BD : Registrar postulación
+BD --> CP : Postulación registrada
+
+CP -> Correo : Solicitar envío de notificación
+Correo --> CP : Correo enviado
+
+CP --> UI : Confirmar postulación exitosa
+UI --> Aspirante : Mostrar "Postulación exitosa"
+
+@enduml
