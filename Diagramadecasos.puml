@@ -1,0 +1,57 @@
+@startuml
+title Diagrama de Casos de Uso - TalentTrack
+
+left to right direction
+
+actor Reclutador
+actor Aspirante
+actor "Servicio de Correo Externo (API)" as Correo
+
+rectangle "TalentTrack" {
+
+    usecase "Registrarse" as UC1
+    usecase "Ingresar datos\npersonales" as UC2
+    usecase "Registrar nivel\nde estudios" as UC3
+    usecase "Cargar currículum\n(PDF)" as UC4
+
+    usecase "Buscar vacantes" as UC5
+    usecase "Postularse a\nvacante" as UC6
+
+    usecase "Gestionar vacantes" as UC7
+    usecase "Registrar vacante" as UC8
+    usecase "Modificar vacante" as UC9
+    usecase "Dar de baja\nvacante" as UC10
+
+    usecase "Evaluar\npostulaciones" as UC11
+    usecase "Agendar entrevista\ntécnica" as UC12
+    usecase "Registrar calificación\ny comentarios" as UC13
+    usecase "Actualizar estado\nde postulación" as UC14
+
+    usecase "Enviar notificación\na aspirante" as UC15
+}
+
+Aspirante --> UC1
+Aspirante --> UC5
+Aspirante --> UC6
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC1 ..> UC4 : <<include>>
+
+UC6 ..> UC5 : <<include>>
+
+Reclutador --> UC7
+Reclutador --> UC11
+Reclutador --> UC12
+Reclutador --> UC13
+Reclutador --> UC14
+
+UC7 ..> UC8 : <<include>>
+UC7 ..> UC9 : <<include>>
+UC7 ..> UC10 : <<include>>
+
+UC14 ..> UC15 : <<include>>
+
+Correo --> UC15
+
+@enduml
